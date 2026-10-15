@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f4f4f5;
+  --foreground: #171717;
+  --mui-input-bg: #ffffff;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* ── BRAND ──────────────────────────────────────────────────────────────────────────────
+   The only place a project picks its hue. Every component uses `brand-*` (never a named
+   Tailwind hue like emerald/indigo), so swapping these 11 lines rebrands the whole app.
+   Mirror the hex values in app/lib/design-tokens.ts (MUI + charts read those).
+   Example: indigo → replace `emerald` with `indigo` below. */
+@theme {
+  --color-brand-50: var(--color-emerald-50);
+  --color-brand-100: var(--color-emerald-100);
+  --color-brand-200: var(--color-emerald-200);
+  --color-brand-300: var(--color-emerald-300);
+  --color-brand-400: var(--color-emerald-400);
+  --color-brand-500: var(--color-emerald-500);
+  --color-brand-600: var(--color-emerald-600);
+  --color-brand-700: var(--color-emerald-700);
+  --color-brand-800: var(--color-emerald-800);
+  --color-brand-900: var(--color-emerald-900);
+  --color-brand-950: var(--color-emerald-950);
+
+  /* Secondary hue for "accent" buttons (actions that push to an external system). */
+  --color-accent: var(--color-blue-600);
+  --color-accent-hover: var(--color-blue-700);
+  --color-accent-active: var(--color-blue-800);
+}
+
+/* ── Design tokens ──────────────────────────────────────────────────────────────────────
+   See docs/ui-standards.md. Mirrored in providers/MuiThemeRegistry.tsx (via app/lib/design-tokens.ts)
+   so MUI and Tailwind surfaces agree. */
+@theme {
+  /* Small type scale for dense tables/chips (below Tailwind's text-xs = 12px). Use these
+     instead of arbitrary text-[Npx]. */
+  --text-2xs: 0.6875rem; /* 11px */
+  --text-3xs: 0.625rem; /* 10px */
+  --text-4xs: 0.5625rem; /* 9px */
+  --text-5xs: 0.5rem; /* 8px */
+
+  /* Semantic colors: text-primary / bg-primary / border-danger … */
+  --color-primary: var(--color-brand-600);
+  --color-primary-hover: var(--color-brand-700);
+  --color-primary-active: var(--color-brand-800);
+  --color-primary-soft: var(--color-brand-50);
+  --color-danger: var(--color-red-600);
+  --color-danger-hover: var(--color-red-700);
+  --color-warning: var(--color-amber-500);
+
+  /* Radius roles: controls (inputs, buttons) → rounded-control; cards/panels → rounded-card;
+     dialogs → rounded-dialog. */
+  --radius-control: 0.75rem;
+  --radius-card: 1rem;
+  --radius-dialog: 1.5rem;
+}
+
+.dark {
+  --background: #09090b; /* zinc-950 */
+  --foreground: #fafafa; /* zinc-50 */
+  --mui-input-bg: #09090b; /* zinc-950 */
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Thin scrollbar for the dark sidebar */
+.sidebar-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.sidebar-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(82, 82, 91, 0.3);
+  border-radius: 10px;
+}
+
+.sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--color-brand-500) 50%, transparent);
+}
+
+.sidebar-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(82, 82, 91, 0.3) transparent;
+}
+
+/* Ensure all buttons and clickable elements show the pointer cursor */
+button,
+[role="button"],
+select,
+input[type="date"],
+input[type="checkbox"],
+input[type="radio"] {
+  cursor: pointer !important;
+}
+
+/* Ensure disabled states show the default or not-allowed cursor */
+button:disabled,
+[role="button"]:disabled {
+  cursor: not-allowed !important;
+}
